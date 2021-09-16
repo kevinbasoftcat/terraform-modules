@@ -4,7 +4,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "UpdateManagement" {
-  name = var.resource_group_name
+  name = var.rgname
   location = "UK South"
 }
 
