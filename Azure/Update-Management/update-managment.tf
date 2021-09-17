@@ -3,7 +3,7 @@ provider "azurerm" {
   }
 }
 locals {
-  random_name_suffix = "${var.resourceprefix}-AutoAcct-${random_string.random_name_suffix}"
+  random_name_suffix = "${var.resourceprefix}-AutoAcct-${random_string.randomstring}"
 }
 
 resource "random_string" "randomstring" {
