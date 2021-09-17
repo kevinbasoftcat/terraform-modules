@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "UpdateManagement" {
 }
 
 resource "azurerm_automation_account" "UpdateManagement" {
-  name = "KJB-AA-UpdateManagement"
+  name = join("-", var.resourceprefix, "AA", "UpdateManagement")
   location = azurerm_resource_group.UpdateManagement.location
   resource_group_name = azurerm_resource_group.UpdateManagement.name
   sku_name = "Basic"
