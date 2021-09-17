@@ -3,7 +3,7 @@ provider "azurerm" {
   }
 }
 
-resource "random_string" "randomstring" {
+resource "random_id" "randomstring" {
   length = 5
   special = false
   lower = true
