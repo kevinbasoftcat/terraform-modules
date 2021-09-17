@@ -3,7 +3,7 @@ provider "azurerm" {
   }
 }
 
-resource "random_id" "randomstring" {
+resource "random_string" "randomstring" {
   length = 5
   special = false
   lower = true
@@ -15,7 +15,7 @@ resource "azurerm_resource_group" "UpdateManagement" {
 }
 
 resource "azurerm_automation_account" "UpdateManagement" {
-  name = join("-", [var.resourceprefix, "AutoAcct", random_id.randomstring])
+  name = join("-", [var.resourceprefix, "AutoAcct", random_string.randomstring])
   location = azurerm_resource_group.UpdateManagement.location
   resource_group_name = azurerm_resource_group.UpdateManagement.name
   sku_name = "Basic"
