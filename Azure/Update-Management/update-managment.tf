@@ -2,6 +2,9 @@ provider "azurerm" {
   features { 
   }
 }
+locals {
+  random_name_suffix = "${random_string.randomstring}"
+}
 
 resource "random_string" "randomstring" {
   length = 5
@@ -15,7 +18,7 @@ resource "azurerm_resource_group" "UpdateManagement" {
 }
 
 resource "azurerm_automation_account" "UpdateManagement" {
-  name = "${var.resourceprefix}-AutoAcct-${random_string.randomstring}"
+  name = "${var.resourceprefix}-AutoAcct-${local.random_name_suffix}"
   location = azurerm_resource_group.UpdateManagement.location
   resource_group_name = azurerm_resource_group.UpdateManagement.name
   sku_name = "Basic"
