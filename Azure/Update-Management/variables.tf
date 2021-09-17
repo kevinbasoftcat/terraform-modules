@@ -1,5 +1,5 @@
 variable "rgname" {
     type = string
-    default = "KJB"
+    default = "UpdateManagement"
   
 }
