@@ -15,7 +15,7 @@ resource "azurerm_resource_group" "UpdateManagement" {
 }
 
 resource "azurerm_automation_account" "UpdateManagement" {
-  name = join("-", [var.resourceprefix, "AutoAcct", randomstring])
+  name = join("-", [var.resourceprefix, "AutoAcct", random_id.randomstring])
   location = azurerm_resource_group.UpdateManagement.location
   resource_group_name = azurerm_resource_group.UpdateManagement.name
   sku_name = "Basic"
