@@ -10,7 +10,3 @@ variable "resourceprefix" {
       error_message = "The resource prefix must be only 3 characters long."
     }
 }
-variable "testvar" {
-  type = string
-  description = "Test variable value"
-}
