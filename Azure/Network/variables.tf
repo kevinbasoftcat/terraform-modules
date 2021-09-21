@@ -11,7 +11,7 @@ variable "resourceprefix" {
     }
 }
 variable "vnetaddressprefix" {
-    type = string
+    type = list(string)
     description = "Please enter a valid network CIDR block to use for the vNet. This must be a CIDR notation of /24 or larger"
 }
 variable "bastionhostsubnet" {

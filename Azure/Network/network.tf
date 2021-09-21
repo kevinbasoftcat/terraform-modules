@@ -22,7 +22,7 @@ resource "azurerm_virtual_network" "vNet" {
   address_space = var.vnetaddressprefix
 }
 
-resource "azurerm_sunet" "vNetBastionSubnet" {
+resource "azurerm_subnet" "vNetBastionSubnet" {
   name = "AzureBastionSubnet"
   resource_group_name = azurerm_resource_group.vNet.Name
   virtual_network_name = azurerm_virtual_network.vNet.name
