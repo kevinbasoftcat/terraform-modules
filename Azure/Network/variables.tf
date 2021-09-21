@@ -22,3 +22,41 @@ variable "monitoringsubnet" {
     type = string
     description = "Please enter a valid network CIDR block to use for the Monitoring subnet"
 }
+variable "bastionnsgrules" {
+    description = "NSG rules used for Azure Bastion Host"
+    type = list(object({
+        name                        = string
+        priority                    = number
+        direction                   = string
+        access                      = string
+        protocol                    = string
+        source_port_range           = string
+        destination_port_range      = string
+        source_address_prefix       = string
+        destination_address_prefix  = string
+    }))
+    default = [{
+        name                        = "AllowHttpsInBound"
+        priority                    = "100"
+        direction                   = "Inbound"
+        access                      = "Allow"
+        protocol                    = "Tcp"
+        source_port_range           = "*"
+        destination_port_range      = "443"
+        source_address_prefix       = "Internet"
+        destination_address_prefix  = "*"
+    },
+    {
+        name                        = "AllowGatewayManagerInBound"
+        priority                    = "110"
+        direction                   = "Inbound"
+        access                      = "Allow"
+        protocol                    = "Tcp"
+        source_port_range           = "*"
+        destination_port_range      = ["443","4443"]
+        source_address_prefix       = "GatewayManager"
+        destination_address_prefix  = "*"
+    }
+    ]
+  
+}
