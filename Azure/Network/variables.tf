@@ -25,29 +25,4 @@ variable "monitoringsubnet" {
 variable "bastionnsgrules" {
     description = "NSG rules used for Azure Bastion Host"
     type = list(map(string))
-    default = [
-    {
-        name                        = "AllowHttpsInBound"
-        priority                    = "100"
-        direction                   = "Inbound"
-        access                      = "Allow"
-        protocol                    = "Tcp"
-        source_port_ranges           = "*"
-        destination_port_ranges      = "443"
-        source_address_prefix       = "Internet"
-        destination_address_prefix  = "*"
-    },
-    {
-        name                        = "AllowGatewayManagerInBound"
-        priority                    = "110"
-        direction                   = "Inbound"
-        access                      = "Allow"
-        protocol                    = "Tcp"
-        source_port_ranges          = "*"
-        destination_port_ranges     = "443,4443"
-        source_address_prefix       = "GatewayManager"
-        destination_address_prefix  = "*"
-    }
-    ]
-  
 }
