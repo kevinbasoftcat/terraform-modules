@@ -41,7 +41,7 @@ resource "azurerm_network_security_group" "bastionNSG" {
     location = azurerm_resource_group.vNet.location
     resource_group_name = azurerm_resource_group.vNet.name
 
-    dynamic "bastionnsgrules" {
+    dynamic "security_rule" {
         for_each = [for s in var.bastionnsgrules : {
                 name                        = s.name
                 priority                    = s.priority
@@ -54,16 +54,16 @@ resource "azurerm_network_security_group" "bastionNSG" {
                 destination_address_prefix  = s.destination_address_prefix
         }]
         content {
-                name                        = bationnsgrules.value.name
-                priority                    = bationnsgrules.value.priority
-                direction                   = bationnsgrules.value.direction
-                access                      = bationnsgrules.value.access
-                protocol                    = bationnsgrules.value.protocol
-                source_port_ranges          = bationnsgrules.value.source_port_ranges
-                destination_port_ranges     = bationnsgrules.value.destination_port_ranges
-                source_address_prefix       = bationnsgrules.value.source_address_prefix
-                destination_address_prefix  = bationnsgrules.value.destination_address_prefix
-                description                 = bationnsgrules.value.description
+                name                        = security_rule.value.name
+                priority                    = security_rule.value.priority
+                direction                   = security_rule.value.direction
+                access                      = security_rule.value.access
+                protocol                    = security_rule.value.protocol
+                source_port_ranges          = security_rule.value.source_port_ranges
+                destination_port_ranges     = security_rule.value.destination_port_ranges
+                source_address_prefix       = security_rule.value.source_address_prefix
+                destination_address_prefix  = security_rule.value.destination_address_prefix
+                description                 = security_rule.value.description
         }
     }
 }
