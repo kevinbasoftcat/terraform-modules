@@ -42,19 +42,28 @@ resource "azurerm_network_security_group" "bastionNSG" {
     resource_group_name = azurerm_resource_group.vNet.name
 
     dynamic "bastionnsgrules" {
-        for_each = var.bastionnsgrules
+        for_each = [for s in var.bastionnsgrules : {
+                name                        = s.name
+                priority                    = s.priority
+                direction                   = s.direction
+                access                      = s.access
+                protocol                    = s.protocol
+                source_port_ranges          = split(",", replace(s.source_port_ranges, "*", "0-65535"))
+                destination_port_ranges     = split(",", replace(s.destination_port_ranges, "*", "0-65535"))
+                source_address_prefix       = s.source_address_prefix
+                destination_address_prefix  = s.destination_address_prefix
+        }]
         content {
-                    name                        = bastionnsgrules.value["name"]
-                    priority                    = bastionnsgrules.value["priority"]
-                    direction                   = bastionnsgrules.value["direction"]
-                    access                      = bastionnsgrules.value["access"]
-                    protocol                    = bastionnsgrules.value["protocol"]
-                    source_port_range           = bastionnsgrules.value["source_port_range"]
-                    source_port_ranges          = bastionnsgrules.value["source_port_ranges"]
-                    destination_port_range      = bastionnsgrules.value["destination_port_range"]
-                    destination_port_ranges     = bastionnsgrules.value["destination_port_ranges"]
-                    source_address_prefix       = bastionnsgrules.value["source_address_prefix"]
-                    destination_address_prefix  = bastionnsgrules.value["destination_address_prefix"]
+                name                        = bationnsgrules.value.name
+                priority                    = bationnsgrules.value.priority
+                direction                   = bationnsgrules.value.direction
+                access                      = bationnsgrules.value.access
+                protocol                    = bationnsgrules.value.protocol
+                source_port_ranges          = bationnsgrules.value.source_port_ranges
+                destination_port_ranges     = bationnsgrules.value.destination_port_ranges
+                source_address_prefix       = bationnsgrules.value.source_address_prefix
+                destination_address_prefix  = bationnsgrules.value.destination_address_prefix
+                description                 = bationnsgrules.value.description
         }
     }
 }
