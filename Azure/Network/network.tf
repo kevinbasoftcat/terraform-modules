@@ -19,7 +19,7 @@ resource "azurerm_virtual_network" "vNet" {
   name = "${var.resourceprefix}-vNet-${random_string.randomstring.result}"
   location = azurerm_resource_group.vNet.location
   resource_group_name = azurerm_resource_group.vNet.name
-  address_space = var.vnetaddressprefix
+  address_space = ["${var.vnetaddressprefix}"]
 }
 
 resource "azurerm_subnet" "vNetBastionSubnet" {
