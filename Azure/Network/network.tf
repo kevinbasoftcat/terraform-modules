@@ -24,7 +24,7 @@ resource "azurerm_virtual_network" "vNet" {
 
 resource "azurerm_subnet" "vNetBastionSubnet" {
   name = "AzureBastionSubnet"
-  resource_group_name = azurerm_resource_group.vNet.Name
+  resource_group_name = azurerm_resource_group.vNet.name
   virtual_network_name = azurerm_virtual_network.vNet.name
   address_prefixes = var.bastionhostsubnet
 }
