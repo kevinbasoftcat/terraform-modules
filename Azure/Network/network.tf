@@ -49,8 +49,10 @@ resource "azurerm_network_security_group" "bastionNSG" {
                     direction                   = bastionnsgrules.value["direction"]
                     access                      = bastionnsgrules.value["access"]
                     protocol                    = bastionnsgrules.value["protocol"]
-                    source_port_range           = bastionnsgrules.value["source_port_range "]
+                    source_port_range           = bastionnsgrules.value["source_port_range"]
+                    source_port_ranges          = bastionnsgrules.value["source_port_ranges"]
                     destination_port_range      = bastionnsgrules.value["destination_port_range"]
+                    destination_port_ranges     = bastionnsgrules.value["destination_port_ranges"]
                     source_address_prefix       = bastionnsgrules.value["source_address_prefix"]
                     destination_address_prefix  = bastionnsgrules.value["destination_address_prefix"]
         }

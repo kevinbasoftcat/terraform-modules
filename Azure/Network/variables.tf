@@ -31,7 +31,9 @@ variable "bastionnsgrules" {
         access                      = string
         protocol                    = string
         source_port_range           = string
-        destination_port_range      = list(string)
+        source_port_ranges          = list(string)
+        destination_port_range      = string
+        destination_port_ranges     = list(string)
         source_address_prefix       = string
         destination_address_prefix  = string
     }))
@@ -53,7 +55,7 @@ variable "bastionnsgrules" {
         access                      = "Allow"
         protocol                    = "Tcp"
         source_port_range           = "*"
-        destination_port_range      = ["443","4443"]
+        destination_port_ranges     = ["443","4443"]
         source_address_prefix       = "GatewayManager"
         destination_address_prefix  = "*"
     }
