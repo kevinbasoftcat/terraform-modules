@@ -11,7 +11,7 @@ resource "random_string" "randomstring" {
 }
 resource "azurerm_resource_group" "UpdateManagement" {
   name = var.rgname
-  location = "UK South"
+  location = var.location
 }
 
 resource "azurerm_automation_account" "UpdateManagement" {
@@ -73,8 +73,8 @@ resource "azurerm_monitor_action_group" "UpdateManagement" {
   short_name = "${var.resourceprefix}-PA"
 
   email_receiver {
-    name = "Kevin Barlow"
-    email_address = "kevinba@softcat.com"
+    name = var.emailreceivername
+    email_address = var.emailreceiveremail
   }
   
 }
