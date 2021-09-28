@@ -30,3 +30,20 @@ variable "subnet_names" {
   type        = list(string)
   default     = ["subnet1", "subnet2", "subnet3"]
 }
+variable "subnet_service_endpoints" {
+  description = "A map of subnet name to service endpoints to add to the subnet."
+  type        = map(any)
+  default     = {}
+}
+
+variable "subnet_enforce_private_link_endpoint_network_policies" {
+  description = "A map of subnet name to enable/disable private link endpoint network policies on the subnet."
+  type        = map(bool)
+  default     = {}
+}
+
+variable "subnet_enforce_private_link_service_network_policies" {
+  description = "A map of subnet name to enable/disable private link service network policies on the subnet."
+  type        = map(bool)
+  default     = {}
+}
