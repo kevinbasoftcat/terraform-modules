@@ -30,6 +30,14 @@ variable "subnet_names" {
   type        = list(string)
   default     = ["subnet1", "subnet2", "subnet3"]
 }
+
+# If no values specified, this defaults to Azure DNS 
+variable "dns_servers" {
+  description = "The DNS servers to be used with vNet."
+  type        = list(string)
+  default     = []
+}
+
 variable "subnet_service_endpoints" {
   description = "A map of subnet name to service endpoints to add to the subnet."
   type        = map(any)
