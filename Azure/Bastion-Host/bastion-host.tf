@@ -47,3 +47,25 @@ resource "azurerm_subnet_network_security_group_association" "bastionNSG" {
     subnet_id = var.bastionsubnetid
     network_security_group_id = azurerm_network_security_group.bastionNSG.id
 }
+
+resource "azurerm_public_ip" "bastion" {
+  name = "${var.resourceprefix}-BastionPubIP-${random_string.randomstring.result}"
+  resource_group_name = azurerm_resource_group.bastion.name
+  location = azurerm_resource_group.bastion.location
+  allocation_method = "static"
+  sku = "standard"
+
+}
+
+resource "azurerm_bastion_host" "bastion" {
+  name = "${var.resourceprefix}-Bastion-${random_string.randomstring.result}"
+  resource_group_name = azurerm_resource_group.bastion.name
+  location = azurerm_resource_group.bastion.location
+
+  ip_configuration {
+    name = "BastionPubIP"
+    subnet_id = var.bastionsubnetid
+    public_ip_address_id = azurerm_public_ip.bastion.id
+  }
+  
+}

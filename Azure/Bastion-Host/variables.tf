@@ -18,6 +18,7 @@ variable "bastionsubnetid" {
     type = string
     description = "Please provide the subnet id for the Bastion to be deployed to"
 }
+
 variable "bastionnsgrules" {
     description = "NSG rules used for Azure Bastion Host"
     type = list(map(string))
