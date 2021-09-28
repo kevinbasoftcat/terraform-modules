@@ -52,8 +52,8 @@ resource "azurerm_public_ip" "bastion" {
   name = "${var.resourceprefix}-BastionPubIP-${random_string.randomstring.result}"
   resource_group_name = azurerm_resource_group.bastion.name
   location = azurerm_resource_group.bastion.location
-  allocation_method = "static"
-  sku = "standard"
+  allocation_method = "Static"
+  sku = "Standard"
 
 }
 
