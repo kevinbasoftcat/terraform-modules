@@ -8,20 +8,15 @@ resource "random_string" "randomstring" {
   lower = true
   number = true
 }
-resource "azurerm_resource_group" "vNet" {
+resource "azurerm_resource_group" "bastion" {
   name = var.rgname
   location = var.location
 }
-resource "azurerm_subnet" "vNetBastionSubnet" {
-  name = "AzureBastionSubnet"
-  resource_group_name = azurerm_resource_group.vNet.name
-  virtual_network_name = azurerm_virtual_network.vNet.name
-  address_prefixes = ["${var.bastionhostsubnet}"]
-}
+
 resource "azurerm_network_security_group" "bastionNSG" {
     name = "${var.resourceprefix}-BastionNSG-${random_string.randomstring.result}"
-    location = azurerm_resource_group.vNet.location
-    resource_group_name = azurerm_resource_group.vNet.name
+    location = azurerm_resource_group.bastion.location
+    resource_group_name = azurerm_resource_group.bastion.name
 
     dynamic "security_rule" {
         for_each = [for s in var.bastionnsgrules : {
@@ -49,6 +44,6 @@ resource "azurerm_network_security_group" "bastionNSG" {
     }
 }
 resource "azurerm_subnet_network_security_group_association" "bastionNSG" {
-    subnet_id = azurerm_subnet.vNetBastionSubnet.id
+    subnet_id = var.bastionsubnetid
     network_security_group_id = azurerm_network_security_group.bastionNSG.id
 }
