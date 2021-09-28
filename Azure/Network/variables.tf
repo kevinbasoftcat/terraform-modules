@@ -16,13 +16,17 @@ variable "resourceprefix" {
 }
 variable "vnetaddressprefix" {
     type = string
-    description = "Please enter a valid network CIDR block to use for the vNet. This must be a CIDR notation of /24 or larger"
+    description = "Please enter a valid network CIDR block to use for the vNet."
+    default = "10.0.0.0/16"
 }
-variable "bastionhostsubnet" {
-    type = string
-    description = "Please enter a valid network CIDR block to use for the Bastion subnet"
+
+variable "subnet_prefixes" {
+  description = "The address prefix to use for the subnet."
+  type        = list(string)
+  default     = ["10.0.1.0/24"]
 }
-variable "monitoringsubnet" {
-    type = string
-    description = "Please enter a valid network CIDR block to use for the Monitoring subnet"
+variable "subnet_names" {
+  description = "A list of public subnets inside the vNet."
+  type        = list(string)
+  default     = ["subnet1", "subnet2", "subnet3"]
 }
