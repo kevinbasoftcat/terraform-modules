@@ -2,11 +2,11 @@ variable "location" {
   type = string
   description = "Locaton to use for the deployment of resources"
 }
-variable "rgname" {
+variable "rg_name" {
     type = string
     description = "Resource group name to deploy the Update Management resources into" 
 }
-variable "resourceprefix" {
+variable "resource_prefix" {
     type = string
     description = "Prefix to use when naming each of the resources please ensure this is only 3 characters long"
     validation {
@@ -14,7 +14,7 @@ variable "resourceprefix" {
       error_message = "The resource prefix must be only 3 characters long."
     }
 }
-variable "vnetaddressprefix" {
+variable "vnet_address_prefix" {
     type = string
     description = "Please enter a valid network CIDR block to use for the vNet."
     default = "10.0.0.0/16"

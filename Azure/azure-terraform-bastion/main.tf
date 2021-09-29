@@ -2,7 +2,7 @@ provider "azurerm" {
   features { 
   }
 }
-resource "random_string" "randomstring" {
+resource "random_string" "random_string" {
   length = 5
   special = false
   lower = true
@@ -13,13 +13,13 @@ resource "azurerm_resource_group" "bastion" {
   location = var.location
 }
 
-resource "azurerm_network_security_group" "bastionNSG" {
-    name = "${var.resourceprefix}-BastionNSG-${random_string.randomstring.result}"
+resource "azurerm_network_security_group" "bastion_nsg" {
+    name = "${var.resourceprefix}-BastionNSG-${random_string.random_string.result}"
     location = azurerm_resource_group.bastion.location
     resource_group_name = azurerm_resource_group.bastion.name
 
     dynamic "security_rule" {
-        for_each = [for s in var.bastionnsgrules : {
+        for_each = [for s in var.bastion_nsg_rules : {
                 name                        = s.name
                 priority                    = s.priority
                 direction                   = s.direction
@@ -43,9 +43,9 @@ resource "azurerm_network_security_group" "bastionNSG" {
         }
     }
 }
-resource "azurerm_subnet_network_security_group_association" "bastionNSG" {
-    subnet_id = var.bastionsubnetid
-    network_security_group_id = azurerm_network_security_group.bastionNSG.id
+resource "azurerm_subnet_network_security_group_association" "bastion_ndg" {
+    subnet_id = var.bastion_subnet_id
+    network_security_group_id = azurerm_network_security_group.bastion_nsg.id
 }
 
 resource "azurerm_public_ip" "bastion" {
@@ -64,7 +64,7 @@ resource "azurerm_bastion_host" "bastion" {
 
   ip_configuration {
     name = "BastionPubIP"
-    subnet_id = var.bastionsubnetid
+    subnet_id = var.bastion_subnet_id
     public_ip_address_id = azurerm_public_ip.bastion.id
   }
   
