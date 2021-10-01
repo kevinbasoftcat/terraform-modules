@@ -43,7 +43,7 @@ resource "azurerm_network_security_group" "bastion_nsg" {
         }
     }
 }
-resource "azurerm_subnet_network_security_group_association" "bastion_ndg" {
+resource "azurerm_subnet_network_security_group_association" "bastion_nsg" {
     subnet_id = var.bastion_subnet_id
     network_security_group_id = azurerm_network_security_group.bastion_nsg.id
 }
