@@ -17,7 +17,7 @@ resource "azurerm_resource_group" "update_management" {
 resource "azurerm_automation_account" "update_management" {
   name = "${var.resource_prefix}-AutoAcct-${random_string.random_string.result}"
   location = azurerm_resource_group.update_management.location
-  resource_group_name = azurerm_resource_group.UpdateManagement.name
+  resource_group_name = azurerm_resource_group.update_management.name
   sku_name = "Basic"
   
 }
@@ -73,8 +73,8 @@ resource "azurerm_monitor_action_group" "update_management" {
   short_name = "${var.resource_prefix}-PA"
 
   email_receiver {
-    name = var.emailreceivername
-    email_address = var.emailreceiveremail
+    name = var.email_receiver_name
+    email_address = var.email_receiver_email
   }
   
 }
